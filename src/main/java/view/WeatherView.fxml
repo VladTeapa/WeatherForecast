@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.WheatherView">
+   <children>
+      <MenuButton alignment="CENTER" layoutX="100.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Country" textAlignment="CENTER">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Tara 1" />
+        </items>
+      </MenuButton>
+      <MenuButton alignment="CENTER" layoutX="358.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Town" textAlignment="CENTER">
+        <items>
+          <MenuItem mnemonicParsing="false" text="Action 1" />
+          <MenuItem mnemonicParsing="false" text="Action 2" />
+        </items>
+      </MenuButton>
+      <Label layoutX="286.0" layoutY="41.0" text="Label" />
+   </children>
+</AnchorPane>
