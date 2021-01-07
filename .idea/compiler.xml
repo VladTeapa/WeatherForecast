@@ -6,7 +6,8 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="WheaterForecast" />
+        <module name="WeatherForecaster5000" />
+        <module name="WeatherForecast" />
       </profile>
     </annotationProcessing>
   </component>
