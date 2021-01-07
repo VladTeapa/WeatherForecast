@@ -1,22 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.WheatherView">
+<AnchorPane prefHeight="440.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.WeatherView">
    <children>
-      <MenuButton alignment="CENTER" layoutX="100.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Country" textAlignment="CENTER">
+      <MenuButton fx:id="countryDropBox" alignment="CENTER" layoutX="100.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Country" textAlignment="CENTER">
         <items>
           <MenuItem mnemonicParsing="false" text="Tara 1" />
         </items>
       </MenuButton>
-      <MenuButton alignment="CENTER" layoutX="358.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="Town" textAlignment="CENTER">
+      <MenuButton fx:id="cityDropBox" alignment="CENTER" layoutX="358.0" layoutY="85.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="142.0" text="City" textAlignment="CENTER">
         <items>
           <MenuItem mnemonicParsing="false" text="Action 1" />
           <MenuItem mnemonicParsing="false" text="Action 2" />
         </items>
       </MenuButton>
-      <Label layoutX="286.0" layoutY="41.0" text="Label" />
+      <Label alignment="CENTER" layoutX="300.0" layoutY="30.0" text="Weather Forecast 5000" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+         <font>
+            <Font name="System Bold" size="24.0" />
+         </font></Label>
+      <Label layoutX="44.0" layoutY="89.0" text="Country:  ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label layoutX="326.0" layoutY="89.0" text="City:  ">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </Label>
+      <Label fx:id="countryCityLabel" layoutX="42.0" layoutY="156.0" text="Country, City">
+         <font>
+            <Font name="System Bold" size="19.0" />
+         </font>
+      </Label>
+      <Label fx:id="timeLabel" layoutX="42.0" layoutY="184.0" text="Time">
+         <font>
+            <Font name="System Bold" size="15.0" />
+         </font>
+      </Label>
+      <Label fx:id="currentWeatherLabel" layoutX="42.0" layoutY="205.0" text="Current weather">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="weatherImage" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/SunnyCloudy.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="360.0" layoutY="177.0" text="Temperature: ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="207.0" text="Humidity: ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="237.0" text="Wind Speed: ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label layoutX="360.0" layoutY="267.0" text="Precipitation: ">
+         <font>
+            <Font name="System Bold" size="13.0" />
+         </font>
+      </Label>
+      <Label fx:id="temperatureLabel" layoutX="460.0" layoutY="178.0" text="Label" />
+      <Label fx:id="humidityLabel" layoutX="460.0" layoutY="208.0" text="Label" />
+      <Label fx:id="windSpeedLabel" layoutX="460.0" layoutY="238.0" text="Label" />
+      <Label fx:id="precipitationLabel" layoutX="460.0" layoutY="268.0" text="Label" />
    </children>
 </AnchorPane>
