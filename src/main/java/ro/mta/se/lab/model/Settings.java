@@ -12,8 +12,10 @@ public class Settings {
     /**
      * Hardcoded params
      */
-    public static String fileInput = "src/main/resources/ro/mta/se/lab/config/config.cfg";
-    public static String apiKey = "069426cb83249d34ad107aeeb36205a7";
+    public final static String fileInput = "src/main/resources/ro/mta/se/lab/config/config.cfg";
+    public final static String apiKey = "069426cb83249d34ad107aeeb36205a7";
+    public final static String loggerStatus = "src/main/resources/ro/mta/se/lab/logger/loggerStatus";
+    public final static String loggerHistory = "src/main/resources/ro/mta/se/lab/logger/loggerHistory";
 
     /**
      * Dynamic params

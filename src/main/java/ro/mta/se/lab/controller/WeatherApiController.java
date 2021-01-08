@@ -13,12 +13,23 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.Scanner;
 
+/**
+ * WeatherApiController
+ * @author VladTeapa
+ */
+
 public class WeatherApiController {
+
 
     public WeatherApiController() {
 
     }
 
+    /**
+     * Function that returns weather data for a certain city
+     * @param city is the city where we want to see what the weather is like
+     * @return is the data about weather
+     */
     public JSONObject getWeather(String city) {
         JSONObject jsonObject = null;
         try {
@@ -29,10 +40,10 @@ public class WeatherApiController {
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
             jsonObject = new JSONObject(response.body().toString());
         } catch (IOException | InterruptedException e) {
-            System.out.println("Api error!");
+            FileManagerController.writeToLog(Settings.loggerStatus, "Api error!", FileManagerController.APPEND, FileManagerController.ERROR);
             return null;
         }
-        System.out.println(jsonObject.toString());
+        FileManagerController.writeToLog(Settings.loggerHistory, (jsonObject.toString()), FileManagerController.APPEND, FileManagerController.INFO);
         return jsonObject;
     }
 }

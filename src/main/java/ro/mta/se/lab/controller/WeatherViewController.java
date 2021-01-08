@@ -13,8 +13,16 @@ import ro.mta.se.lab.model.Settings;
 import java.util.Calendar;
 import java.util.List;
 
+/**
+ * WeatherViewController class
+ * @author VladTeapa
+ */
 public class WeatherViewController {
 
+    /**
+     * This function initialises the menu buttons and defines the event listeners for menu buttons and menu items
+     * @param scene
+     */
     public static void initializeMenuButton(Scene scene) {
         List<Country> countryList = Settings.countryList;
 
@@ -31,10 +39,12 @@ public class WeatherViewController {
         for (Country country : countryList) {
             MenuItem menuItem = new MenuItem(country.getCode());
             menuItem.setOnAction(event -> {
+
                 /**
                  * Event listener for menuButton
                  */
-                System.out.println("Changed country!");
+
+                FileManagerController.writeToLog(Settings.loggerStatus, "Changed country!", FileManagerController.APPEND, FileManagerController.INFO);
                 menuButton.setText(menuItem.getText());
                 MenuButton cityMenuButton = (MenuButton) scene.lookup("#cityDropBox");
                 cityMenuButton.getItems().clear();
@@ -42,13 +52,20 @@ public class WeatherViewController {
                 for (int j = 0; j < country.getCityList().size(); j++) {
                     MenuItem item = new MenuItem(country.getCityList().get(j).getDenumire());
                     item.setOnAction(e -> {
+
                         /**
                          * Event listener for menuItem
-                         */
-                        System.out.println("Changed city!");
+                         **/
+
+                        FileManagerController.writeToLog(Settings.loggerStatus, "Changed city!", FileManagerController.APPEND, FileManagerController.INFO);
                         cityMenuButton.setText(item.getText());
                         WeatherApiController weatherApiController = new WeatherApiController();
                         JSONObject jsonObject = weatherApiController.getWeather(item.getText());
+
+
+                        /**
+                         * Getting labels references
+                         */
 
                         Label temperatureLabel = (Label) scene.lookup("#temperatureLabel");
                         Label humidityLabel = (Label) scene.lookup("#humidityLabel");
@@ -59,6 +76,10 @@ public class WeatherViewController {
                         Label currentWeatherLabel = (Label) scene.lookup("#currentWeatherLabel");
 
                         ImageView imageView = (ImageView) scene.lookup("#weatherImageView");
+
+                        /**
+                         * Modifying the labels
+                         */
 
                         temperatureLabel.setText(String.format("%.1f", (jsonObject.getJSONObject("main").getDouble("temp") - 272.15)) + " \u2103");
                         humidityLabel.setText(String.format("%.1f", (jsonObject.getJSONObject("main").getDouble("humidity"))) + "%");
@@ -73,19 +94,23 @@ public class WeatherViewController {
 
                         timeLabel.setText(calendar.getTime().toString());
 
+                        /**
+                         * Changing the image
+                         */
+
                         StringBuilder stringBuilder = new StringBuilder(jsonObject.getJSONArray("weather").getJSONObject(0).getString("icon"));
                         stringBuilder.deleteCharAt(stringBuilder.toString().length() - 1);
 
                         String url = stringBuilder.toString();
                         url = "file:./src/main/resources/ro/mta/se/lab/img/" + url + ".png";
-                        System.out.println("Image url: "+url);
+                        FileManagerController.writeToLog(Settings.loggerStatus, "Image url: " + url, FileManagerController.APPEND, FileManagerController.INFO);
                         imageView.setImage(new Image(url));
 
                     });
                     cityMenuButton.getItems().add(item);
-                    System.out.println(item.getText());
+                    FileManagerController.writeToLog(Settings.loggerStatus,item.getText(), FileManagerController.APPEND, FileManagerController.INFO);
                 }
-            }); // add functionality
+            });
             menuButton.getItems().add(menuItem);
         }
     }

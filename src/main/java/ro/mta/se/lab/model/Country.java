@@ -7,6 +7,11 @@ import java.util.List;
  * Class that has a number of cities
  */
 public class Country {
+
+    /**
+     * The first param is a list of cities for a country and the code identifies the country
+     */
+
     private List<City> cityList;
     private String code;
 

@@ -5,6 +5,11 @@ package ro.mta.se.lab.model;
  * Class that defines a city
  */
 public class City {
+
+    /**
+     * These params define the data that interests us for a city
+     */
+
     private double longitude;
     private double latitude;
     private int id;

@@ -25,7 +25,7 @@ public class Main extends Application {
 
     /**
      * Start function that is called at start of the program
-     * @param stage
+     * @param stage is the param where we'll set the scene
      * @throws IOException
      */
     @Override
