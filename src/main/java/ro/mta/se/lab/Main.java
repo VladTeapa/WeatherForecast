@@ -35,7 +35,7 @@ public class Main extends Application {
         scene = new Scene(loadFXML("./view/WeatherView"));
         stage.setScene(scene);
 
-        initializeMenuButton(scene, Settings.countryList);
+        initializeMenuButton(scene);
         Settings.scene = scene;
 
         stage.show();

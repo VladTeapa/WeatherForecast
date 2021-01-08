@@ -29,7 +29,8 @@ public class WeatherApiController {
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
             jsonObject = new JSONObject(response.body().toString());
         } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
+            System.out.println("Api error!");
+            return null;
         }
         System.out.println(jsonObject.toString());
         return jsonObject;

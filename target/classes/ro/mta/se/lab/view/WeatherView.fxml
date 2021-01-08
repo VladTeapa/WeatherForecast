@@ -38,9 +38,9 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <ImageView fx:id="weatherImage" fitHeight="150.0" fitWidth="200.0" layoutX="42.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="weatherImageView" fitHeight="100.0" fitWidth="150.0" layoutX="42.0" layoutY="254.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../img/SunnyCloudy.png" />
+            <Image fx:id="weatherImage" url="@../img/13.png" />
          </image>
       </ImageView>
       <Label layoutX="360.0" layoutY="177.0" text="Temperature: ">

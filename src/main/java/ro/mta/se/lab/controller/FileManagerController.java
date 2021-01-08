@@ -14,6 +14,14 @@ import java.util.Scanner;
  * File manager class
  */
 public class FileManagerController {
+
+    /**
+     * Parameters that can be used to tell when logging if you want to append or create a new file
+     */
+    public static int APPEND = 0;
+    public static int NEW = 1;
+
+
     /**
      * Reads the cities and countries from file
      * @param path
@@ -71,6 +79,19 @@ public class FileManagerController {
         return result;
     }
 
+    /**
+     * Function that writes to a log file
+     * @param file the file to be written in
+     * @param type if the function should append or write to new file
+     * @return 0 for succes, everything else is error
+     */
+    public static int writeToLog(String file, int type){
+        return 0;
+    }
+
+    /**
+     * We don't need to be able to create an instance
+     */
     private FileManagerController(){
 
     }
