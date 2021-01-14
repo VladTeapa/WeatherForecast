@@ -36,55 +36,59 @@ public class FileManagerController {
      * @param path is where the config file is located
      * @return
      */
-    public static List<Country> readConfigFile(String path){
-        boolean flag;
+    public List<Country> readConfigFile(String path){
         List<Country> result = new ArrayList<>();
-        File file = new File(path);
-        if (!file.exists()) {
-            FileManagerController.writeToLog(Settings.loggerStatus, "File is null!", FileManagerController.APPEND, FileManagerController.ERROR);
-            return null;
-        }
-
-        if (file.isDirectory()) {
-            FileManagerController.writeToLog(Settings.loggerStatus, "File is a directory!", FileManagerController.APPEND, FileManagerController.ERROR);
-            return null;
-        }
-        Scanner scanner;
         try {
-            scanner = new Scanner(file);
-        } catch (FileNotFoundException fileNotFoundException){
-            FileManagerController.writeToLog(Settings.loggerStatus, "File not found!", FileManagerController.APPEND, FileManagerController.ERROR);
-            return null;
-        }
-        String fileData = null;
-        while(scanner.hasNextLine()){
-            fileData = scanner.nextLine();
-            String data[] = fileData.split("\\s+");
-            if(data.length!=5){
-                System.out.println(data.length);
-                System.out.println("Bad file format!");
+            boolean flag;
+            File file = new File(path);
+            if (!file.exists()) {
+                writeToLog(Settings.loggerStatus, "File is null!", FileManagerController.APPEND, FileManagerController.ERROR);
                 return null;
             }
-            City city = new City();
-            city.setId(Integer.parseInt(data[0]));
-            city.setDenumire(data[1]);
-            city.setLatitude(Double.parseDouble(data[2]));
-            city.setLongitude(Double.parseDouble(data[3]));
-            flag = false;
-            for (Country country : result) {
-                if (country.getCode().equals(data[4])) {
-                    flag = true;
-                    country.getCityList().add(city);
-                    break;
+
+            if (file.isDirectory()) {
+                writeToLog(Settings.loggerStatus, "File is a directory!", FileManagerController.APPEND, FileManagerController.ERROR);
+                return null;
+            }
+            Scanner scanner;
+            try {
+                scanner = new Scanner(file);
+            } catch (FileNotFoundException fileNotFoundException) {
+                writeToLog(Settings.loggerStatus, "File not found!", FileManagerController.APPEND, FileManagerController.ERROR);
+                return null;
+            }
+            String fileData = null;
+            while (scanner.hasNextLine()) {
+                fileData = scanner.nextLine();
+                String data[] = fileData.split("\\s+");
+                if (data.length != 5) {
+                    System.out.println(data.length);
+                    System.out.println("Bad file format!");
+                    return null;
+                }
+                City city = new City();
+                city.setId(Integer.parseInt(data[0]));
+                city.setDenumire(data[1]);
+                city.setLatitude(Double.parseDouble(data[2]));
+                city.setLongitude(Double.parseDouble(data[3]));
+                flag = false;
+                for (Country country : result) {
+                    if (country.getCode().equals(data[4])) {
+                        flag = true;
+                        country.getCityList().add(city);
+                        break;
+                    }
+                }
+                if (!flag) {
+                    Country aux = new Country(new ArrayList<>(), data[4]);
+                    aux.getCityList().add(city);
+                    result.add(aux);
                 }
             }
-            if(!flag){
-                Country aux = new Country(new ArrayList<>(), data[4]);
-                aux.getCityList().add(city);
-                result.add(aux);
-            }
+            writeToLog(Settings.loggerStatus, "Finished reading config file!", FileManagerController.APPEND, FileManagerController.INFO);
+        } catch (Exception ex){
+            return null;
         }
-        FileManagerController.writeToLog(Settings.loggerStatus, "Finished reading config file!", FileManagerController.APPEND, FileManagerController.INFO);
         return result;
     }
 
@@ -96,7 +100,7 @@ public class FileManagerController {
      * @param logLevel log level, if log level is -1 console logging is disabled
      * @return 0 for succes, everything else is error
      */
-    public static int writeToLog(String file, String data, int type, int logLevel){
+    public int writeToLog(String file, String data, int type, int logLevel){
         try {
             FileWriter fileWriter = null;
             if(type == FileManagerController.APPEND)
@@ -123,7 +127,7 @@ public class FileManagerController {
             if(flag)
                 System.out.println(dataFile + data + "\n");
             fileWriter.close();
-        } catch (IOException e){
+        } catch (IOException | NullPointerException e){
             return -1;
         }
         return 0;
@@ -132,7 +136,7 @@ public class FileManagerController {
     /**
      * We don't need to be able to create an instance
      */
-    private FileManagerController(){
+    public FileManagerController(){
 
     }
 }

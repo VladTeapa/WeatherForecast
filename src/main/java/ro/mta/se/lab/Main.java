@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import ro.mta.se.lab.controller.FileManagerController;
 import ro.mta.se.lab.model.Settings;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 
@@ -30,7 +31,8 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        Settings.countryList = FileManagerController.readConfigFile(Settings.fileInput);
+        FileManagerController fileManagerController = new FileManagerController();
+        Settings.countryList = fileManagerController.readConfigFile(Settings.fileInput);
 
         scene = new Scene(loadFXML("./view/WeatherView"));
         stage.setScene(scene);

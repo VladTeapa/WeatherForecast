@@ -3,6 +3,7 @@ package ro.mta.se.lab.controller;
 import org.json.JSONObject;
 import ro.mta.se.lab.model.Settings;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -20,9 +21,10 @@ import java.util.Scanner;
 
 public class WeatherApiController {
 
+    private final FileManagerController fileManagerController;
 
-    public WeatherApiController() {
-
+    public WeatherApiController(FileManagerController fileManagerController) {
+        this.fileManagerController = fileManagerController;
     }
 
     /**
@@ -40,10 +42,10 @@ public class WeatherApiController {
             HttpResponse response = client.send(request, HttpResponse.BodyHandlers.ofString());
             jsonObject = new JSONObject(response.body().toString());
         } catch (IOException | InterruptedException e) {
-            FileManagerController.writeToLog(Settings.loggerStatus, "Api error!", FileManagerController.APPEND, FileManagerController.ERROR);
+            fileManagerController.writeToLog(Settings.loggerStatus, "Api error!", FileManagerController.APPEND, FileManagerController.ERROR);
             return null;
         }
-        FileManagerController.writeToLog(Settings.loggerHistory, (jsonObject.toString()), FileManagerController.APPEND, FileManagerController.INFO);
+        fileManagerController.writeToLog(Settings.loggerHistory, (jsonObject.toString()), FileManagerController.APPEND, FileManagerController.INFO);
         return jsonObject;
     }
 }
