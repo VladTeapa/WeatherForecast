@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import ro.mta.se.lab.model.Country;
 import ro.mta.se.lab.model.Settings;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -23,18 +24,19 @@ public class WeatherViewController {
      * This function initialises the menu buttons and defines the event listeners for menu buttons and menu items
      * @param scene
      */
-    public static void initializeMenuButton(Scene scene) {
+    public static boolean initializeMenuButton(Scene scene) {
+        FileManagerController fileManagerController = new FileManagerController();
         List<Country> countryList = Settings.countryList;
 
         MenuButton menuButton = (MenuButton) scene.lookup("#countryDropBox");
 
         if (menuButton == null) {
             System.out.println("Menu button is null!");
-            return;
+            return false;
         }
 
         if (countryList == null)
-            return;
+            return false;
 
         for (Country country : countryList) {
             MenuItem menuItem = new MenuItem(country.getCode());
@@ -44,7 +46,7 @@ public class WeatherViewController {
                  * Event listener for menuButton
                  */
 
-                FileManagerController.writeToLog(Settings.loggerStatus, "Changed country!", FileManagerController.APPEND, FileManagerController.INFO);
+                fileManagerController.writeToLog(Settings.loggerStatus, "Changed country!", FileManagerController.APPEND, FileManagerController.INFO);
                 menuButton.setText(menuItem.getText());
                 MenuButton cityMenuButton = (MenuButton) scene.lookup("#cityDropBox");
                 cityMenuButton.getItems().clear();
@@ -57,9 +59,9 @@ public class WeatherViewController {
                          * Event listener for menuItem
                          **/
 
-                        FileManagerController.writeToLog(Settings.loggerStatus, "Changed city!", FileManagerController.APPEND, FileManagerController.INFO);
+                        fileManagerController.writeToLog(Settings.loggerStatus, "Changed city!", FileManagerController.APPEND, FileManagerController.INFO);
                         cityMenuButton.setText(item.getText());
-                        WeatherApiController weatherApiController = new WeatherApiController();
+                        WeatherApiController weatherApiController = new WeatherApiController(new FileManagerController());
                         JSONObject jsonObject = weatherApiController.getWeather(item.getText());
 
 
@@ -103,15 +105,16 @@ public class WeatherViewController {
 
                         String url = stringBuilder.toString();
                         url = "file:./src/main/resources/ro/mta/se/lab/img/" + url + ".png";
-                        FileManagerController.writeToLog(Settings.loggerStatus, "Image url: " + url, FileManagerController.APPEND, FileManagerController.INFO);
+                        fileManagerController.writeToLog(Settings.loggerStatus, "Image url: " + url, FileManagerController.APPEND, FileManagerController.INFO);
                         imageView.setImage(new Image(url));
 
                     });
                     cityMenuButton.getItems().add(item);
-                    FileManagerController.writeToLog(Settings.loggerStatus,item.getText(), FileManagerController.APPEND, FileManagerController.INFO);
+                    fileManagerController.writeToLog(Settings.loggerStatus,item.getText(), FileManagerController.APPEND, FileManagerController.INFO);
                 }
             });
             menuButton.getItems().add(menuItem);
         }
+        return true;
     }
 }
