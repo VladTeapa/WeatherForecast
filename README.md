@@ -13,7 +13,8 @@
 ## Configuration
 -----
 To configure what countries and cities you can see search for config.cfg in resources<br>
-Add the info with tabs in between<br>
+Don't change the name of the config file<br>
+Add the info with tabs in between like below<br>
 Id  Name  Latitude  Longitude Country code<br>
 
 ## Logging
@@ -24,7 +25,8 @@ The second one is for errors, informations, etc
 
 ## Run
 ------
-You just run the program, select a country, select a city and read what information you need
+You can just run the program, select a country, select a city and read what information you need<br>
+There are 2 cities per country and 10 countries by default in the config file
 
 ## Testing
 ------
