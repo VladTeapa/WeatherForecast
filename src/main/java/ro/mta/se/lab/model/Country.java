@@ -9,7 +9,7 @@ import java.util.List;
 public class Country {
 
     /**
-     * The first param is a list of cities for a country and the code identifies the country
+     * The first param is a list of cities for a country and the second one is the code that identifies the country
      */
 
     private List<City> cityList;

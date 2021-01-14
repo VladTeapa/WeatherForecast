@@ -23,6 +23,10 @@ public class WeatherApiController {
 
     private final FileManagerController fileManagerController;
 
+    /**
+     * Constructor for WeatherApiController
+     * @param fileManagerController we need a fileManager for logging
+     */
     public WeatherApiController(FileManagerController fileManagerController) {
         this.fileManagerController = fileManagerController;
     }

@@ -133,9 +133,6 @@ public class FileManagerController {
         return 0;
     }
 
-    /**
-     * We don't need to be able to create an instance
-     */
     public FileManagerController(){
 
     }
