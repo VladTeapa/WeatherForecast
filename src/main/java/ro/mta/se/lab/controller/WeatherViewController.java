@@ -31,12 +31,14 @@ public class WeatherViewController {
         MenuButton menuButton = (MenuButton) scene.lookup("#countryDropBox");
 
         if (menuButton == null) {
-            System.out.println("Menu button is null!");
+            fileManagerController.writeToLog(Settings.loggerStatus, "Menu button is null!", FileManagerController.APPEND, FileManagerController.ERROR);
             return false;
         }
 
-        if (countryList == null)
+        if (countryList == null) {
+            fileManagerController.writeToLog(Settings.loggerStatus, "Country list is null!", FileManagerController.APPEND, FileManagerController.ERROR);
             return false;
+        }
 
         for (Country country : countryList) {
             MenuItem menuItem = new MenuItem(country.getCode());
