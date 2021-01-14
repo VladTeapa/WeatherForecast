@@ -90,6 +90,10 @@ public class WeatherViewController {
                         currentWeatherLabel.setText(jsonObject.getJSONArray("weather").getJSONObject(0).getString("main"));
                         countryCityLabel.setText(country.getCode() + ", " + item.getText());
 
+                        /**
+                         * Changing the time label
+                         */
+
                         Calendar calendar = Calendar.getInstance();
                         calendar.add(Calendar.MILLISECOND, -calendar.getTimeZone().getOffset(calendar.getTimeInMillis()));
                         calendar.add(Calendar.SECOND, jsonObject.getInt("timezone"));
