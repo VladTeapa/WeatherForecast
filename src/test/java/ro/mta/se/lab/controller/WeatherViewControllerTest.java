@@ -1,28 +1,33 @@
 package ro.mta.se.lab.controller;
 
 import javafx.scene.Scene;
-import org.junit.Rule;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.mockito.junit.MockitoRule;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+
 @RunWith(MockitoJUnitRunner.class)
 class WeatherViewControllerTest {
 
     @Mock
     Scene scene;
 
-    @Rule
-    public MockitoRule initRule = MockitoJUnit.rule();
+    @BeforeEach
+    void setUp() {
+        scene = mock(Scene.class);
+    }
 
 
     @Test
     void initializeMenuButton() {
-        assertEquals(WeatherViewController.initializeMenuButton(scene), true);
+        assertFalse(WeatherViewController.initializeMenuButton(scene));
+        assertThrows(NullPointerException.class, () -> {
+            WeatherViewController.initializeMenuButton(null);
+        });
     }
 }

@@ -20,7 +20,7 @@ public class Settings {
     /**
      * Dynamic params
      */
-    public static List<Country> countryList;
+    public static List<Country> countryList = null;
     public static Scene scene;
 
     private Settings(){

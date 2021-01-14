@@ -37,6 +37,10 @@ class WeatherApiControllerTest {
         assertEquals(weatherApiController.getWeather("Bucharest").getInt("timezone"), 7200);
         assertEquals(weatherApiController.getWeather("Paris").getInt("timezone"), 3600);
         assertEquals(weatherApiController.getWeather("Paris").getString("name"), "Paris");
+        assertEquals(weatherApiController.getWeather("Tokyo").getString("name"), "Tokyo");
+        assertEquals(weatherApiController.getWeather("Tokyo").getJSONObject("sys").getString("country"), "JP");
+        assertEquals(weatherApiController.getWeather("Tokyo").getInt("timezone"), 32400);
+        assertEquals(weatherApiController.getWeather("Tokyo").getInt("id"), 1850144);
         System.out.println("Passed weatherApi!");
     }
 }
